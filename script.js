@@ -28,8 +28,13 @@ class Stopwatch {
 		}
 	}
 	stop () {
-		this.running = false;
-		clearInterval(this.watch);
+		if (this.running) {
+			this.running = false;
+			clearInterval(this.watch);			
+		}
+		else {
+			this.reset();
+		}
 	}
 	step() {
 		if (!this.running) return;
@@ -53,6 +58,9 @@ class Stopwatch {
 		item.innerHTML = timeshot;
 		resultsList.appendChild(item);
 	}
+	clear() {
+		resultsList.innerHTML = '';
+	}
 }
 
 function pad0(value) {
@@ -70,3 +78,4 @@ var resultsList = document.querySelector('.results');
 startButton.addEventListener('click', () => stopwatch.start());
 stopButton.addEventListener('click', () => stopwatch.stop()); //dlaczego nie samo: stopwatch.stop?
 stopwatch.display.addEventListener('click', () => stopwatch.shot());
+resultsList.addEventListener('click', stopwatch.clear);
