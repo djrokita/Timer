@@ -57,7 +57,12 @@ class Stopwatch {
     let timeshot = this.format(this.times);
     let item = document.createElement("li");
     item.innerHTML = timeshot;
-    resultsList.appendChild(item);
+    if (resultsList.children.length > 9) {
+        var ask = confirm('To much results. Do You want to clear resuls list?');
+        console.log(ask);
+        if (ask) this.clear();
+      }
+    else resultsList.appendChild(item);
   }
   clear() {
     resultsList.innerHTML = "";
