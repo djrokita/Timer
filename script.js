@@ -6,11 +6,14 @@ class Stopwatch {
 		this.print(this.times);
 	}
 	reset() {
-		this.times = {
-			minutes: 0,
-			seconds: 0,
-			miliseconds: 0
+		if (!this.running) {
+			this.times = {
+				minutes: 0,
+				seconds: 0,
+				miliseconds: 0
+			}
 		};
+		this.print();
 	}
 	print() {
 		this.display.innerText = this.format(this.times);
@@ -48,7 +51,6 @@ class Stopwatch {
 
 function pad0(value) {
 	let result = value.toString();
-	console.log(result);
 	if (result.length < 2) result = '0' + result;
 	return result;
 }
@@ -60,3 +62,4 @@ var stopButton = document.getElementById('stop');
 
 startButton.addEventListener('click', () => stopwatch.start());
 stopButton.addEventListener('click', () => stopwatch.stop()); //dlaczego nie samo: stopwatch.stop?
+stopwatch.display.addEventListener('click', () => stopwatch.reset());
