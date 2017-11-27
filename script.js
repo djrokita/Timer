@@ -47,6 +47,12 @@ class Stopwatch {
 			this.times.seconds = 0;
 		}
 	}
+	shot() {
+		let timeshot = this.format(this.times);
+		let item = document.createElement('li');
+		item.innerHTML = timeshot;
+		resultsList.appendChild(item);
+	}
 }
 
 function pad0(value) {
@@ -59,7 +65,8 @@ const stopwatch = new Stopwatch(document.querySelector('.stopwatch'));
 
 var startButton = document.getElementById('start');
 var stopButton = document.getElementById('stop');
+var resultsList = document.querySelector('.results');
 
 startButton.addEventListener('click', () => stopwatch.start());
 stopButton.addEventListener('click', () => stopwatch.stop()); //dlaczego nie samo: stopwatch.stop?
-stopwatch.display.addEventListener('click', () => stopwatch.reset());
+stopwatch.display.addEventListener('click', () => stopwatch.shot());
