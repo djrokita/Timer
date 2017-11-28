@@ -58,7 +58,7 @@ class Stopwatch {
     let item = document.createElement("li");
     item.innerHTML = timeshot;
     if (resultsList.children.length > 9) {
-        var ask = confirm('To much results. Do You want to clear resuls list?');
+        var ask = confirm('Too many results. Do You want to clear results list?');
         console.log(ask);
         if (ask) this.clear();
       }
