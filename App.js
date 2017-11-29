@@ -57,9 +57,8 @@ class App extends React.Component {
   }
   shot() {
     let timeshot = this.format(this.state);
-    console.log(timeshot);
-    let shotItem = <li>{timeshot}</li>
-    return shotItem;
+    itemArray = [...itemArray, timeshot]; //Wrzucamy stringi z czasem do tablicy
+    console.log(itemArray);
   }
   clear() {
     resultsList.innerHTML = "";
@@ -69,11 +68,13 @@ class App extends React.Component {
       <div>
         <Controls start={this.start.bind(this)} stop={this.stop.bind(this)}/>
         <Container display={this.format(this.state)} output={this.shot.bind(this)}/>
-        <ResultsList item={this.shot.bind(this)}/>
+        <ResultsList results={itemArray}/>
       </div>
     );
   }
 }
+
+let itemArray = [];
 
 let app = <App />
 ReactDOM.render(app, document.getElementById('app'));

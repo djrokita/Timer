@@ -23,11 +23,13 @@ class Container extends React.Component {
 }
 
 class ResultsList extends React.Component {
-	
   render() {
+    let setItem = this.props.results.map((item) => {
+      return <li>{item}</li>
+    });
     return (
-      <ul className='results' id='list' onClick={this.props.clear}>
-      	{this.props.item}
+      <ul className='results' id='list'>
+        {setItem}
       </ul>
     );
   }
@@ -40,3 +42,18 @@ function pad0(value) {
   if (result.length < 2) result = "0" + result;
   return result;
 }
+
+/*
+  constructor(props) {
+    super(props);
+    this.state = {
+      change: 0
+    }
+  }
+  componentWillReceiveProps() {
+    this.setState({
+      change: this.state.change + 1
+    });
+  }
+
+  */
