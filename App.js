@@ -5,7 +5,8 @@ class App extends React.Component {
 	        minutes: 0,
 	        seconds: 0,
 	        miliseconds: 0,
-	        running: false
+	        running: false,
+          change: 0
 		}
 	}
 	format(times) {
@@ -59,16 +60,17 @@ class App extends React.Component {
     let timeshot = this.format(this.state);
     itemArray = [...itemArray, timeshot]; //Wrzucamy stringi z czasem do tablicy
     console.log(itemArray);
+    this.setState({change: this.state.change + 1});
   }
   clear() {
-    resultsList.innerHTML = "";
+    itemArray = [];
   }
   render() {
     return (
       <div>
         <Controls start={this.start.bind(this)} stop={this.stop.bind(this)}/>
         <Container display={this.format(this.state)} output={this.shot.bind(this)}/>
-        <ResultsList results={itemArray}/>
+        <ResultsList results={itemArray} clear={this.clear.bind(this)}/>
       </div>
     );
   }
