@@ -1,29 +1,28 @@
 class App extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-	        minutes: 0,
-	        seconds: 0,
-	        miliseconds: 0,
-	        running: false,
-          change: 0
-		}
-	}
-	format(times) {
+  constructor(props) {
+    super(props);
+    this.state = {
+      minutes: 0,
+      seconds: 0,
+      miliseconds: 0,
+      running: false,
+      change: 0
+    };
+  }
+  format(times) {
     return `${pad0(times.minutes)}:${pad0(times.seconds)}:${pad0(
       Math.floor(times.miliseconds)
     )}`;
   }
-	start() {
-		if (!this.state.running) {
-			this.setState({running: true});
-			console.log(this.state.running);
+  start() {
+    if (!this.state.running) {
+      this.setState({ running: true });
       this.watch();
     }
-	}
-	stop() {
+  }
+  stop() {
     if (this.state.running) {
-      this.setState({running: false});
+      this.setState({ running: false });
       clearInterval(this.watch);
     } else {
       this.reset();
@@ -38,40 +37,47 @@ class App extends React.Component {
       });
     }
   }
-	watch() {
+  watch() {
     setInterval(() => this.step(), 10);
-	}
+  }
   step() {
     if (!this.state.running) return;
     this.calculate();
   }
   calculate() {
-    this.setState({miliseconds: this.state.miliseconds + 1});
+    this.setState({ miliseconds: this.state.miliseconds + 1 });
     if (this.state.miliseconds >= 100) {
-      this.setState({seconds: this.state.seconds + 1});
-      this.setState({miliseconds: 0});
+      this.setState({ seconds: this.state.seconds + 1 });
+      this.setState({ miliseconds: 0 });
     }
     if (this.state.seconds >= 60) {
-      this.setState({minutes: this.state.minutes + 1});
-      this.setState({seconds: 0});
+      this.setState({ minutes: this.state.minutes + 1 });
+      this.setState({ seconds: 0 });
     }
   }
   shot() {
-    let timeshot = this.format(this.state);
-    itemArray = [...itemArray, timeshot]; //Wrzucamy stringi z czasem do tablicy
-    console.log(itemArray);
-    this.setState({change: this.state.change + 1});
+    this.setState({ change: this.state.change + 1 });
+    if (this.state.change > 9) {
+      let ask = confirm("Too many results. Do You want to clear results list?");
+      if (ask) this.clear();
+    } else {
+      let timeshot = { time: this.format(this.state), id: this.state.change };
+      itemArray = [...itemArray, timeshot];
+    }
   }
   clear() {
     itemArray = [];
-    this.setState({change: 0});
+    this.setState({ change: 0 });
   }
   render() {
     return (
       <div>
-        <Controls start={this.start.bind(this)} stop={this.stop.bind(this)}/>
-        <Container display={this.format(this.state)} output={this.shot.bind(this)}/>
-        <ResultsList results={itemArray} clear={this.clear.bind(this)}/>
+        <Controls start={this.start.bind(this)} stop={this.stop.bind(this)} />
+        <Display
+          display={this.format(this.state)}
+          output={this.shot.bind(this)}
+        />
+        <ResultsList results={itemArray} clear={this.clear.bind(this)} />
       </div>
     );
   }
@@ -79,5 +85,5 @@ class App extends React.Component {
 
 let itemArray = [];
 
-let app = <App />
-ReactDOM.render(app, document.getElementById('app'));
+let app = <App />;
+ReactDOM.render(app, document.getElementById("app"));
