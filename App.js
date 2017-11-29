@@ -64,6 +64,7 @@ class App extends React.Component {
   }
   clear() {
     itemArray = [];
+    this.setState({change: 0});
   }
   render() {
     return (
