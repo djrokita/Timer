@@ -1,5 +1,5 @@
 # Timer
-A simple timer for ES6 practicing._
+A simple timer for ES6 practicing.
 
-Start with npm start (node.js -> "npm install" -> "npm start")._
-Good luck :)
+<p>Start with npm start (node.js -> "npm install" -> "npm start").</p>
+<p>Good luck :) </p>
