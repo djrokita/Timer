@@ -45,18 +45,25 @@ class App extends React.Component {
     this.calculate();
   }
   calculate() {
-    this.setState({ miliseconds: this.state.miliseconds + 1 });
+    this.setState((prevState) => ({
+      miliseconds: prevState.miliseconds + 1
+    }));
     if (this.state.miliseconds >= 100) {
-      this.setState({ seconds: this.state.seconds + 1 });
+      this.setState((prevState) => ({ 
+        seconds: prevState.seconds + 1
+        }));
       this.setState({ miliseconds: 0 });
     }
     if (this.state.seconds >= 60) {
-      this.setState({ minutes: this.state.minutes + 1 });
+      this.setState((prevState) => ({
+      minutes: prevState.minutes + 1
+      }));
       this.setState({ seconds: 0 });
     }
   }
   shot() {
-    this.setState({ change: this.state.change + 1 });
+    this.setState((prevState) => ({
+     change: prevState.change + 1 }));
     if (this.state.change > 9) {
       let ask = confirm("Too many results. Do You want to clear results list?");
       if (ask) this.clear();
@@ -75,8 +82,7 @@ class App extends React.Component {
         <Controls start={this.start.bind(this)} stop={this.stop.bind(this)} />
         <Display
           display={this.format(this.state)}
-          output={this.shot.bind(this)}
-        />
+          output={this.shot.bind(this)}/>
         <ResultsList results={itemArray} clear={this.clear.bind(this)} />
       </div>
     );

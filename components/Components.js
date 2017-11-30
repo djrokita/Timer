@@ -1,6 +1,5 @@
 class Controls extends React.Component {
-  static propTypes: {
-    name: React.PropTypes.array.isRequired,
+  static propTypes = {
     start: React.PropTypes.func.isRequired,
     stop: React.PropTypes.func.isRequired
   };
@@ -19,7 +18,7 @@ class Controls extends React.Component {
 }
 
 class Display extends React.Component {
-  static propTypes: {
+  static propTypes = {
     display: React.PropTypes.string.isRequired
   };
   render() {
@@ -32,8 +31,8 @@ class Display extends React.Component {
 }
 
 class ResultsList extends React.Component {
-  static propTypes: {
-    results: React.PropTypes.object.isRequired
+  static propTypes = {
+    results: React.PropTypes.array.isRequired
   };
   render() {
     let setItem = this.props.results.map(item => {
